@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="PRIMARY">#4CAF50</color>
+
+    <color name="DARK_PRIMARY">#388E3C</color>
+    <color name="button_color">#388E3C</color>
+    <color name="button_text_color">#FFFFFF</color>
+
+    <color name="LIGHT_PRIMARY">#C8E6C9</color>
+
+    <color name="ACCENT">#FFEB3B</color>
+    <color name="ACCENT_DARK">#536DFE</color>
+
+    <color name="TEXT_ICONS">#FFFFFF</color>
+    <color name="PRIMARY_TEXT">#212121</color>
+    <color name="SECONDARY_TEXT">#757575</color>
+    <color name="DIVIDER_COLOR">#BDBDBD</color>
+
+<!--    find: name="([^"]+)\s-->
+<!--    replace: name="$1_-->
+
+<!--    DARK PRIMARY COLOR  #388E3C-->
+<!--    LIGHT PRIMARY COLOR #C8E6C9-->
+<!--    PRIMARY COLOR       #4CAF50-->
+<!--    TEXT / ICONS        #FFFFFF-->
+<!--    ACCENT COLOR        #536DFE-->
+<!--    PRIMARY TEXT        #212121-->
+<!--    SECONDARY TEXT      #757575-->
+<!--    DIVIDER COLOR       #BDBDBD-->
+</resources>
