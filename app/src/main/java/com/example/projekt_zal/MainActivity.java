@@ -26,6 +26,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     protected List<NameValueItem> nameList;
+    protected static int stopCount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    protected int stopCount = 0;
 
     protected void CreteNotifChannel(){
         NotificationChannel channel = new NotificationChannel("channel_id", "channel_name", NotificationManager.IMPORTANCE_DEFAULT);

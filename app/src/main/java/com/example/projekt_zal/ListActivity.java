@@ -1,19 +1,14 @@
 package com.example.projekt_zal;
 
 import android.os.Bundle;
-import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.Collections;
 import java.util.List;
 
-public class ListActivity extends AppCompatActivity {
+public class ListActivity extends MainActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +32,6 @@ public class ListActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
 }

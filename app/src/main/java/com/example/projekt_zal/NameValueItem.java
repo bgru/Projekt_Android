@@ -4,9 +4,10 @@ import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 
+// można prościej, ale tak jest ciekawiej
 public class NameValueItem implements Serializable {
-    private String name;
-    private Integer value;
+    private final String name;
+    private final Integer value;
 
     public NameValueItem(String name, Integer value) {
         this.name = name;
