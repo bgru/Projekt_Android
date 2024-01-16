@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         arg1EditText.setText("");
         arg2EditText.setText("");
     }
-    private void saveList(List<NameValueItem> list) {
+    protected void saveList(List<NameValueItem> list) {
         SharedPreferences prefs = getSharedPreferences("shared_prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         Gson gson = new Gson();
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private List<NameValueItem> loadList() {
+    protected List<NameValueItem> loadList() {
         SharedPreferences prefs = getSharedPreferences("shared_prefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("NameValueList", null);

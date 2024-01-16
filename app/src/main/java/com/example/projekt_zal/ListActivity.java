@@ -30,5 +30,14 @@ public class ListActivity extends MainActivity {
         });
     }
 
+    public void removeItemFromPreferences(NameValueItem itemToRemove) {
+        MainActivity mainActivity = (MainActivity) getParent();
+        if (mainActivity != null) {
+            mainActivity.nameList.remove(itemToRemove);
+            mainActivity.saveList(mainActivity.nameList);
+        }
+    }
+
+
 
 }
