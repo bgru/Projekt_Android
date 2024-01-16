@@ -1,10 +1,11 @@
 package com.example.projekt_zal;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -25,10 +27,8 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-    protected List<NameValueItem> nameList;
     protected static int stopCount;
-
-
+    protected List<NameValueItem> nameList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
             nameList = new ArrayList<>();
         }
 
-        // Sample data
-//        nameList = new ArrayList<>();
 //        nameList.add(new NameValueItem("Activity 1", 1));
 //        nameList.add(new NameValueItem("Activity 2", 2));
     }
@@ -75,26 +73,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     public void displayButton(View view) {
         Intent intent = new Intent(this, ListActivity.class);
         intent.putExtra("nameList", (Serializable) nameList);
         startActivity(intent);
     }
 
+    @SuppressLint("SetTextI18n")
     public void clearButton(View view) {
         nameList.clear();
 
         TextView nameLabel = findViewById(R.id.nameLabel);
         TextView sumLabel = findViewById(R.id.sumLabel);
 
-        nameLabel.setText("");
-        sumLabel.setText("");
+        nameLabel.setText("No_Data");
+        sumLabel.setText("No_Data");
 
         showToast("List and fields cleared!");
     }
 
-    // Method to save the list
+    public void clearTexFields(View view){
+        EditText nameEditText = findViewById(R.id.nameTextBox);
+        EditText arg1EditText = findViewById(R.id.arg1TextBox);
+        EditText arg2EditText = findViewById(R.id.arg2TextBox);
+        nameEditText.setText("");
+        arg1EditText.setText("");
+        arg2EditText.setText("");
+    }
     private void saveList(List<NameValueItem> list) {
         SharedPreferences prefs = getSharedPreferences("shared_prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -104,12 +109,12 @@ public class MainActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    // Method to load the list
     private List<NameValueItem> loadList() {
         SharedPreferences prefs = getSharedPreferences("shared_prefs", MODE_PRIVATE);
         Gson gson = new Gson();
         String json = prefs.getString("NameValueList", null);
-        Type type = new TypeToken<ArrayList<NameValueItem>>() {}.getType();
+        Type type = new TypeToken<ArrayList<NameValueItem>>() {
+        }.getType();
         return gson.fromJson(json, type);
     }
 
@@ -118,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    protected void CreteNotifChannel(){
+    protected void CreteNotifChannel() {
         NotificationChannel channel = new NotificationChannel("channel_id", "channel_name", NotificationManager.IMPORTANCE_DEFAULT);
         NotificationManager manager = getSystemService(NotificationManager.class);
         if (manager != null) {
@@ -134,6 +139,10 @@ public class MainActivity extends AppCompatActivity {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+            showToast("The app does not have permissions to show Notifications");
+            return;
+        }
         notificationManager.notify(1, builder.build());
     }
 
@@ -142,6 +151,10 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
         stopCount++;
         makeNotification();
+    }
+
+    public void beautify(View view) {
+
     }
 
 

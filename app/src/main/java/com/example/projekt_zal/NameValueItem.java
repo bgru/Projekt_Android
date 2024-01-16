@@ -22,9 +22,4 @@ public class NameValueItem implements Serializable {
         return value;
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        return name + ": " + value;
-    }
 }

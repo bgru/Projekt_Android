@@ -21,14 +21,11 @@ public class ListActivity extends MainActivity {
         CustomListAdapter adapter = new CustomListAdapter(this, nameList);
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NameValueItem item = adapter.getItem(position);
-                if (item != null) {
-                    String message = "Name: " + item.getName() + ", Value: " + item.getValue();
-                    Toast.makeText(ListActivity.this, message, Toast.LENGTH_SHORT).show();
-                }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            NameValueItem item = adapter.getItem(position);
+            if (item != null) {
+                String message = "Name: " + item.getName() + ", Value: " + item.getValue();
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
