@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.projekt_zal.NameValueItem;
@@ -31,6 +32,12 @@ public class CustomListAdapter extends ArrayAdapter<NameValueItem> {
             itemNameTextView.setText(currentItem.getName());
             itemValueTextView.setText(String.valueOf(currentItem.getValue()));
         }
+
+        Button deleteButton = convertView.findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(v -> {
+            remove(getItem(position));
+            notifyDataSetChanged();
+        });
 
         return convertView;
     }
