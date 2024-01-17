@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.projekt_zal.NameValueItem;
+import androidx.annotation.NonNull;
 
 import java.util.List;
 
@@ -18,8 +18,10 @@ public class CustomListAdapter extends ArrayAdapter<NameValueItem> {
         super(context, 0, items);
     }
 
+
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.custom_list_item, parent, false);
         }
@@ -34,15 +36,23 @@ public class CustomListAdapter extends ArrayAdapter<NameValueItem> {
         }
 
         Button deleteButton = convertView.findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(v -> {
-            NameValueItem itemToRemove = getItem(position);
-            remove(itemToRemove);
-            notifyDataSetChanged();
-            ((ListActivity) getContext()).removeItemFromPreferences(itemToRemove);
-        });
-
         deleteButton.setFocusable(false);
         deleteButton.setFocusableInTouchMode(false);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((ListActivity) getContext()).deleteButton(v, position);
+            }
+        });
+
+
+//        deleteButton.setOnClickListener(v -> {
+//            NameValueItem itemToRemove = getItem(position);
+//            remove(itemToRemove);
+//            notifyDataSetChanged();
+//            assert itemToRemove != null;
+//            ((ListActivity) getContext()).removeItemFromPreferences(itemToRemove);
+//        });
 
         return convertView;
     }

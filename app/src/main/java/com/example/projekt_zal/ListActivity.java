@@ -2,7 +2,6 @@ package com.example.projekt_zal;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -30,14 +29,49 @@ public class ListActivity extends MainActivity {
         });
     }
 
-    public void removeItemFromPreferences(NameValueItem itemToRemove) {
-        MainActivity mainActivity = (MainActivity) getParent();
-        if (mainActivity != null) {
-            mainActivity.nameList.remove(itemToRemove);
-            mainActivity.saveList(mainActivity.nameList);
-        }
+    public void deleteButton(View view, int position) {
+        ListView listView = findViewById(R.id.listView);
+
+        // Get the item to remove
+        NameValueItem itemToRemove = ((CustomListAdapter) listView.getAdapter()).getItem(position);
+        assert itemToRemove != null;
+        showToast("" + itemToRemove.getName());
+        showToast("" + nameList.indexOf(itemToRemove));
+
+        // Remove the item from the adapter and update the list
+        ((CustomListAdapter) listView.getAdapter()).remove(itemToRemove);
+        ((CustomListAdapter) listView.getAdapter()).notifyDataSetChanged();
+
+        // Remove the item from SharedPreferences
+        removeItemFromPreferences(itemToRemove);
+
+
+//        // Find the position of the item in the ListView
+//        View parentRow = (View) view.getParent();
+//
+//        ListView listView = (ListView) parentRow.getParent();
+//        final int position = listView.getPositionForView(parentRow);
+//
+//        // Get the item to remove
+//        NameValueItem itemToRemove = ((CustomListAdapter) listView.getAdapter()).getItem(position);
+//
+//
+//        // Remove the item from the adapter and update the list
+//        ((CustomListAdapter) listView.getAdapter()).remove(itemToRemove);
+//        ((CustomListAdapter) listView.getAdapter()).notifyDataSetChanged();
+//
+//        // Remove the item from SharedPreferences
+//        removeItemFromPreferences(itemToRemove);
     }
 
+
+    public void removeItemFromPreferences(NameValueItem itemToRemove) {
+
+        if (nameList.contains(itemToRemove)) {
+            showToast("Item found");
+        }
+        saveList(nameList);
+    }
 
 
 }

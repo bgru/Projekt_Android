@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @SuppressLint("SetTextI18n")
     public void clearButton(View view) {
         nameList.clear();
 
