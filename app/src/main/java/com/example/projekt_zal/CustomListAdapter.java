@@ -38,21 +38,6 @@ public class CustomListAdapter extends ArrayAdapter<NameValueItem> {
         Button deleteButton = convertView.findViewById(R.id.deleteButton);
         deleteButton.setFocusable(false);
         deleteButton.setFocusableInTouchMode(false);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((ListActivity) getContext()).deleteButton(v, position);
-            }
-        });
-
-
-//        deleteButton.setOnClickListener(v -> {
-//            NameValueItem itemToRemove = getItem(position);
-//            remove(itemToRemove);
-//            notifyDataSetChanged();
-//            assert itemToRemove != null;
-//            ((ListActivity) getContext()).removeItemFromPreferences(itemToRemove);
-//        });
 
         return convertView;
     }
