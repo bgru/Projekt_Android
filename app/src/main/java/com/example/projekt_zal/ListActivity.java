@@ -9,15 +9,18 @@ import java.util.List;
 
 public class ListActivity extends MainActivity {
 
+    private List<NameValueItem> nameList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        List<NameValueItem> nameList = (List<NameValueItem>) getIntent().getSerializableExtra("nameList");
+        nameList = (List<NameValueItem>) getIntent().getSerializableExtra("nameList");
+        nameList = setListIdValues(nameList);
 
         ListView listView = findViewById(R.id.listView);
-        CustomListAdapter adapter = new CustomListAdapter(this, nameList);
+        ItemListAdapter adapter = new ItemListAdapter(this, nameList);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
@@ -29,8 +32,17 @@ public class ListActivity extends MainActivity {
         });
     }
 
-    public void deleteButton() {
 
+    public void deleteButton(View view) {
+        // GET ID OF CUSTOM LIST ITEM HERE
+        int id = 0;
+        for (NameValueItem a: nameList
+             ) {
+            if (a.getId() == id){
+                removeItemFromPreferences(a);
+                break;
+            }
+        }
     }
 
 

@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         if (nameList == null) {
             nameList = new ArrayList<>();
         }
+        nameList = setListIdValues(nameList);
 
 //        nameList.add(new NameValueItem("Activity 1", 1));
 //        nameList.add(new NameValueItem("Activity 2", 2));
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 nameLabel.setText(name);
                 sumLabel.setText(String.valueOf(tempSum));
 
-                nameList.add(new NameValueItem(name, tempSum));
+                nameList.add(new NameValueItem(name, tempSum, nameList.size()+1));
                 saveList(nameList);
             } catch (NumberFormatException e) {
                 showToast("Please enter valid numbers.");
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     public void displayButton(View view) {
         Intent intent = new Intent(this, ListActivity.class);
         intent.putExtra("nameList", (Serializable) nameList);
+        nameList = setListIdValues(nameList);
         startActivity(intent);
     }
 
@@ -154,6 +156,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void beautify(View view) {
 
+    }
+
+    public List<NameValueItem> setListIdValues(List<NameValueItem> data){
+        List<NameValueItem> tempList = data;
+        int counter = 0;
+        for(int i=0; i<tempList.size(); i++){
+            NameValueItem t = tempList.get(i);
+            t.setId(i);
+            tempList.set(i, t);
+        }
+
+        return tempList;
     }
 
 

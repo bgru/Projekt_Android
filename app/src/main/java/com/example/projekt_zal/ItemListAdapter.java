@@ -12,9 +12,9 @@ import androidx.annotation.NonNull;
 
 import java.util.List;
 
-public class CustomListAdapter extends ArrayAdapter<NameValueItem> {
+public class ItemListAdapter extends ArrayAdapter<NameValueItem> {
 
-    public CustomListAdapter(Context context, List<NameValueItem> items) {
+    public ItemListAdapter(Context context, List<NameValueItem> items) {
         super(context, 0, items);
     }
 
@@ -28,14 +28,22 @@ public class CustomListAdapter extends ArrayAdapter<NameValueItem> {
 
         TextView itemNameTextView = convertView.findViewById(R.id.itemNameTextView);
         TextView itemValueTextView = convertView.findViewById(R.id.itemValueTextView);
+        TextView itemIdTextView = convertView.findViewById(R.id.itemId);
 
         NameValueItem currentItem = getItem(position);
         if (currentItem != null) {
             itemNameTextView.setText(currentItem.getName());
             itemValueTextView.setText(String.valueOf(currentItem.getValue()));
+            itemIdTextView.setText(String.valueOf(currentItem.getId()));
+
         }
 
         Button deleteButton = convertView.findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(v -> {
+            remove(getItem(position));
+            notifyDataSetChanged();
+
+        });
         deleteButton.setFocusable(false);
         deleteButton.setFocusableInTouchMode(false);
 
