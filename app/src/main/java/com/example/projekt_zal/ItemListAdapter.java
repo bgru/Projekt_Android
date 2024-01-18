@@ -1,6 +1,7 @@
 package com.example.projekt_zal;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,10 +11,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 public class ItemListAdapter extends ArrayAdapter<NameValueItem> {
 
+    public static Integer ID;
     public ItemListAdapter(Context context, List<NameValueItem> items) {
         super(context, 0, items);
     }
@@ -38,12 +42,13 @@ public class ItemListAdapter extends ArrayAdapter<NameValueItem> {
 
         }
 
+        //TODO: Deleting a row also deletes it from Shared Preferenceswea
         Button deleteButton = convertView.findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(v -> {
-            int id = currentItem.getId();
-            ListActivity.deleteButton(id);
-//            remove(getItem(position));
-//            notifyDataSetChanged();
+            ID = currentItem.getId();
+            remove(getItem(position));
+            notifyDataSetChanged();
+
 
         });
         deleteButton.setFocusable(false);
@@ -51,4 +56,5 @@ public class ItemListAdapter extends ArrayAdapter<NameValueItem> {
 
         return convertView;
     }
+
 }

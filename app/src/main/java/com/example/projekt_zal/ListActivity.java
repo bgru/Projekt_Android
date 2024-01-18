@@ -32,35 +32,28 @@ public class ListActivity extends MainActivity {
         });
     }
 
-
-    public void deleteButton(Integer id) {
-        // GET ID OF CUSTOM LIST ITEM HERE
-//        int id = (int) view.getTag();
-        showToast("Function run");
-
-//        int id = 0;
-        for (NameValueItem a: nameList
-             ) {
-            if (a.getId() == id){
-                removeItemFromPreferences(a);
-                showToast("Item in delete button found");
-                return;
-            }
-        }
-        showToast("No item matched");
-
-    }
-
-
-
-
-    public void removeItemFromPreferences(NameValueItem itemToRemove) {
-
-        if (nameList.contains(itemToRemove)) {
-            showToast("Item found");
-        }
-        saveList(nameList);
-    }
+    //TODO: Deleting a row also deletes it from Shared Preferences
+//    public void deleteButton(View view) {
+//        Integer Id = ItemListAdapter.ID;
+//        showToast(""+Id);
+//        for (NameValueItem a: nameList) {
+//            if(a.getId() == Id){
+//                removeItemFromPreferences(a);
+//                return;
+//            }
+//        }
+//        showToast("Item Not Found!");
+//    }
+//
+//
+//    public void removeItemFromPreferences(NameValueItem itemToRemove) {
+//
+//        if (nameList.contains(itemToRemove)) {
+//            showToast("Item removed");
+//        }
+//        nameList.remove(itemToRemove);
+//        saveList(nameList);
+//    }
 
 
 }

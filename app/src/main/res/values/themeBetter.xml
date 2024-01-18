@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="ThemeBetter" parent="Theme.Material3.Dark">
+
+        <item name="colorPrimary">@color/BPG</item>
+        <item name="colorPrimaryVariant">@color/BSB</item>
+        <item name="colorOnPrimary">@color/TEXT_ICONS</item>
+
+        <item name="colorSecondary">@color/SG</item>
+        <item name="colorSecondaryVariant">@color/SG</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="colorAccent">@color/SG</item>
+
+        <item name="android:colorBackground">@color/BSB</item>
+
+        <item name="android:statusBarColor">@color/DIVIDER_COLOR</item>
+
+        <item name="buttonStyle">@style/evenBetterButtonStyle</item>
+
+
+    </style>
+
+    <style name="evenBetterButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="backgroundTint">@color/BSB</item>
+        <item name="android:textColor">@color/BPG</item>
+    </style>
+
+<!--    <style name="Theme.themeBetter" parent="Base.Theme.Projekt_Zal" />-->
+</resources>
+

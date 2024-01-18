@@ -18,6 +18,11 @@
     <color name="SECONDARY_TEXT">#757575</color>
     <color name="DIVIDER_COLOR">#BDBDBD</color>
 
+    <color name="BSB">#ad900d</color>
+    <color name="SG">#758000</color>
+    <color name="BPG">#b6c406</color>
+
+
 <!--    find: name="([^"]+)\s-->
 <!--    replace: name="$1_-->
 

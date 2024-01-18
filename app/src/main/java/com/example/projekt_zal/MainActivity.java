@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,10 +32,20 @@ public class MainActivity extends AppCompatActivity {
     protected List<NameValueItem> nameList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        CreteNotifChannel();
 
+        SharedPreferences sharedPreferences = getSharedPreferences("theme", MODE_PRIVATE);
+        String themeName = sharedPreferences.getString("themeNow", "themeBetter");
+
+        if ("themeBetter".equals(themeName)) {
+            setTheme(R.style.ThemeBetter);
+        } else if ("defTheme".equals(themeName)){
+            setTheme(R.style.Base_Theme_Projekt_Zal);
+        } else {
+            setTheme(R.style.Base_Theme_Projekt_Zal);
+        }
+
+        super.onCreate(savedInstanceState);
+        CreteNotifChannel();
 
         nameList = loadList();
         if (nameList == null) {
@@ -42,9 +53,17 @@ public class MainActivity extends AppCompatActivity {
         }
         nameList = setListIdValues(nameList);
 
-//        nameList.add(new NameValueItem("Activity 1", 1));
-//        nameList.add(new NameValueItem("Activity 2", 2));
+        setContentView(R.layout.activity_main);
+
+        if("themeBetter".equals((themeName))){
+            Button temp = findViewById(R.id.beautifyButton);
+            temp.setText("Go back?");
+            TextView temp2 = findViewById(R.id.textViewBeautify);
+            temp2.setText("Sets the standard theme");
+        }
     }
+
+
 
     public void addButton(View view) {
         EditText nameEditText = findViewById(R.id.nameTextBox);
@@ -155,7 +174,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void beautify(View view) {
+        SharedPreferences sharedPreferences = getSharedPreferences("theme", MODE_PRIVATE);
+        String themeName = sharedPreferences.getString("themeNow", "themeBetter");
+        SharedPreferences.Editor editor = sharedPreferences.edit();
 
+        if("defTheme".equals((themeName))){
+            editor.putString("themeNow", "themeBetter");
+            showToast("applied BSB theme");
+
+        }
+        else{
+            editor.putString("themeNow", "defTheme");
+            showToast("applied default theme");
+
+        }
+        editor.apply();
+
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 
     public List<NameValueItem> setListIdValues(List<NameValueItem> data){
