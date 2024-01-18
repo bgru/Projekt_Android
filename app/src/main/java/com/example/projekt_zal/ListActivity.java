@@ -33,16 +33,22 @@ public class ListActivity extends MainActivity {
     }
 
 
-    public void deleteButton(View view) {
+    public void deleteButton(Integer id) {
         // GET ID OF CUSTOM LIST ITEM HERE
-        int id = 0;
+//        int id = (int) view.getTag();
+        showToast("Function run");
+
+//        int id = 0;
         for (NameValueItem a: nameList
              ) {
             if (a.getId() == id){
                 removeItemFromPreferences(a);
-                break;
+                showToast("Item in delete button found");
+                return;
             }
         }
+        showToast("No item matched");
+
     }
 
 

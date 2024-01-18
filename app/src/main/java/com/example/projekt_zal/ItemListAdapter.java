@@ -40,8 +40,10 @@ public class ItemListAdapter extends ArrayAdapter<NameValueItem> {
 
         Button deleteButton = convertView.findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(v -> {
-            remove(getItem(position));
-            notifyDataSetChanged();
+            int id = currentItem.getId();
+            ListActivity.deleteButton(id);
+//            remove(getItem(position));
+//            notifyDataSetChanged();
 
         });
         deleteButton.setFocusable(false);
